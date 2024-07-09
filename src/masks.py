@@ -1,15 +1,30 @@
-from typing import Union
-
-
-def get_mask_card_number(line_1: Union[str]) -> Union[str]:
+def get_mask_card_number(input_data: str) -> str:
     """Функция, которая принимает на вход номер карты и возвращает ее маску"""
-    slice_1 = line_1[0:3]
-    slice_2 = line_1[4:5]
-    slice_3 = line_1[-4:]
-    return slice_1 + " " + slice_2 + "** **** " + slice_3
+    new_cardnumber = ""
+    new_cardname = ""
+    if "Visa" or "MasterCard" or "Maestro" in input_data:
+        for symbol in input_data:
+            if symbol.isdigit():
+                new_cardnumber += symbol
+            elif symbol.isalpha():
+                new_cardname += symbol
+        slice_1 = new_cardnumber[0:4]
+        slice_2 = new_cardnumber[5:7]
+        slice_3 = new_cardnumber[-4:]
+        mask_card = slice_1 + " " + slice_2 + "** **** " + slice_3
+    return (f"{new_cardname} {mask_card}")
 
 
-def get_mask_account(line_2: Union[str]) -> Union[str]:
+def get_mask_account(input_data: str) -> str:
     """Функция, которая принимает на вход номер счета и возвращает его маску"""
-    slice_1 = line_2[-4:]
-    return "**" + slice_1
+    new_accountnumber = ""
+    new_accountname = ""
+    if "Счет" in input_data:
+        for symbol in input_data:
+            if symbol.isalpha():
+                new_accountname += symbol
+            elif symbol.isdigit():
+                new_accountnumber += symbol
+    slice_4 = new_accountnumber[-4:]
+    mask_account = "**" + slice_4
+    return (f"{new_accountname} {mask_account}")
