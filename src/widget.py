@@ -12,13 +12,12 @@ def mask_account_card(input_data: str) -> str | None:
 def get_data(input_data: str) -> str | None:
     """Функция преобразования даты"""
     data = input_data.split("T")[0]
-    data_final = f"{data[-2:]}.{data[5:7]}.{data[:4]}"
+    slice_data = f"{data[-2:]}.{data[5:7]}.{data[:4]}"
 
-    return data_final
+    return slice_data
 
 
 print(mask_account_card("Visa Platinum 7000792289606361"))
 print(mask_account_card("Maestro 7000792289606361"))
 print(mask_account_card("Счет 73654108430135874305"))
-
 print(get_data("2024-03-11T02:26:18.671407"))

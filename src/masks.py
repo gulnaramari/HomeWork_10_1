@@ -22,9 +22,9 @@ def get_mask_account(input_data: str) -> str:
     if "Счет" in input_data:
         for symbol in input_data:
             if symbol.isalpha():
-                new_accountname += symbol
+                new_name += symbol
             elif symbol.isdigit():
-                new_accountnumber += symbol
-    slice_4 = new_accountnumber[-4:]
-    mask_account = "**" + slice_4
-    return (f"{new_accountname}  {mask_account}")
+                new_number += symbol
+    slice_number = new_number[-4:]
+    mask_account = "**" + slice_number
+    return (f"{new_name} {mask_account}")
