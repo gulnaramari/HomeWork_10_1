@@ -1,3 +1,4 @@
+import os
 from typing import Any
 
 info_data = [
@@ -5,18 +6,18 @@ info_data = [
 ]
 
 
-def filter_by_state(info_data:list[dict[str, Any]]), state_id: str = 'EXECUTED') -> list[dict[str, Any]]:
+def filter_by_state(info_data:list[dict[str, Any]], state_id: str = 'EXECUTED') -> list[dict[str, Any]]:
     """Функция, описывающая фильтр банкосвких операций по ключу id"""
     new_list = []
     for key in info_data:
         if key.get("state") == state_id:
             new_list.append(key)
     return  new_list
-print filter_by_state(info_data)
+print (filter_by_state(info_data))
 
 
 def sort_by_date(info_data:list[dict[str, Any]], reverse=True) -> list[dict[str, Any]]:
     """Функция сортировки данных по дате"""
-    sorted_list = sorted(info_data, key=lambda info_data, info_data["date"], reverse=reverse)
+    sorted_list = sorted(info_data, key=lambda info_data: info_data["date"], reverse = reverse)
     return sorted_list
-print sort_by_date(info_data)
+print (sort_by_date(info_data))
