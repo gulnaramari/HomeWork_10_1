@@ -28,3 +28,4 @@ def get_mask_account(input_data: str) -> str:
     slice_number = new_number[-4:]
     mask_account = "**" + slice_number
     return (f"{new_name} {mask_account}")
+
