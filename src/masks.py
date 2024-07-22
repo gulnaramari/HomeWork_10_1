@@ -1,3 +1,6 @@
+import os
+
+
 def get_mask_card_number(input_data: str) -> str:
     """Функция, которая принимает на вход номер карты и возвращает ее маску"""
     new_cardnumber = ""
