@@ -17,8 +17,8 @@ def get_mask_card_number(input_data: str) -> str:
 
 def get_mask_account(input_data: str) -> str:
     """Функция, которая принимает на вход номер счета и возвращает его маску"""
-    new_accountnumber = ""
-    new_accountname = ""
+    new_number = ""
+    new_name = ""
     if "Счет" in input_data:
         for symbol in input_data:
             if symbol.isalpha():
