@@ -1,3 +1,6 @@
+import os
+
+
 def get_mask_card_number(input_data: str) -> str:
     """Функция, которая принимает на вход номер карты и возвращает ее маску"""
     new_cardnumber = ""
@@ -16,7 +19,7 @@ def get_mask_card_number(input_data: str) -> str:
             slice_3 = new_cardnumber[-4:]
             mask_card = slice_1 + " " + slice_2 + "** **** " + slice_3
         else:
-            print("Неверный формат данных")
+            raise ValueError("Неверный формат данных")
 
     return (f"{new_cardname} {mask_card}")
 
