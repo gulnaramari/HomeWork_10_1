@@ -8,8 +8,8 @@ info_data = [
 ]
 
 
-def filter_by_state(info_data: list[dict[str, Any]], state_id: str = 'EXECUTED') -> list[dict[str, Any]]:
-    """Функция, описывающая фильтр банкосвких операций по ключу id"""
+def filter_by_state(info_data: list[dict[str, Any]], state_id: str = "EXECUTED") -> list[dict[str, Any]]:
+    """Функция, описывающая фильтр банковских операций по ключу id"""
     new_list = []
     for key in info_data:
         if key.get("state") == state_id:
