@@ -2,7 +2,7 @@ from typing import Any
 
 import pytest
 
-from src.masks import get_mask_card_number
+from src.masks import get_mask_account, get_mask_card_number
 
 
 @pytest.fixture
@@ -77,3 +77,39 @@ def test_get_uncorrect_name_card_number(input_data: str) -> Any:
 def test_get_mask_card_number_wrong_type(input_data: str) -> Any:
     with pytest.raises(TypeError):
         get_mask_card_number(input_data)
+
+
+@pytest.fixture
+def user_data() -> list[str]:
+    return ["Счет 64686473678894779589",
+            "Счет 35383033474447895560",
+            "Visa Platinum 8990922113665229",
+            "Visa Gold 5999414228426353",
+            "Счет 73654108430135874305",
+            ]
+
+
+@pytest.mark.parametrize("user_data, expected_mask", [
+                        ("Счет 64686473678894779589", "Счет **9589"),
+                        ("Счет 35383033474447895560", "Счет **5560"),
+                        ("Счет 73654108430135874305", "Счет **4305"),
+                        ])
+def test_get_mask_account(user_data: str, expected_mask: str) -> Any:
+    assert get_mask_account(user_data) == expected_mask
+
+
+def test_get_mask_account_invalid_number(user_data: str) -> Any:
+    with pytest.raises(ValueError):
+        get_mask_account("12345678")
+
+
+@pytest.mark.parametrize("user_data", [
+                        (1831982476737658),
+                        (12345),
+                        (11098765),
+                        (1158300734726758),
+                         ])
+def test_get_mask_account_wrong_type(user_data: str) -> Any:
+    with pytest.raises(TypeError):
+        get_mask_account(user_data)
+

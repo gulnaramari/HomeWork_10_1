@@ -30,6 +30,9 @@ def get_mask_card_number(input_data: str) -> str:
 
 def get_mask_account(input_data: str) -> str:
     """Функция, которая принимает на вход номер счета и возвращает его маску"""
+    for arg in input_data:
+        if not isinstance(arg, str):
+            raise TypeError("Ошибка типа данных")
     new_number = ""
     new_name = ""
     if "Счет" in input_data:
@@ -38,6 +41,12 @@ def get_mask_account(input_data: str) -> str:
                 new_name += symbol
             elif symbol.isdigit():
                 new_number += symbol
-    slice_number = new_number[-4:]
-    mask_account = "**" + slice_number
+    else:
+        raise ValueError("Некорректный ввод")
+    if len(new_number) == 20:
+        if new_number[0] != "0":
+            slice_number = new_number[-4:]
+            mask_account = "**" + slice_number
+    else:
+        raise ValueError("Некорректный номер счета")
     return (f"{new_name} {mask_account}")
