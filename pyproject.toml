@@ -18,7 +18,7 @@ warn_return_any = true
 exclude = 'venv'
 
 [tool.isort]
-add_imports = ["import os"]
+
 
 [tool.poetry]
 name = "pythonproject"
