@@ -112,4 +112,3 @@ def test_get_mask_account_invalid_number(user_data: str) -> Any:
 def test_get_mask_account_wrong_type(user_data: str) -> Any:
     with pytest.raises(TypeError):
         get_mask_account(user_data)
-
