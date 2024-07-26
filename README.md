@@ -19,7 +19,7 @@ pip install -r requirements.txt
 ## Документация:
 
 Для получения информации о тестировании 
-[file:///C:/Users/%D0%90%D0%B4%D0%BC%D0%B8%D0%BD/PycharmProjects/pythonProject/coverage_report/z_a44f0ac069e85531_test_masks_py.html]
+[file:///C:/Users/%D0%90%D0%B4%D0%BC%D0%B8%D0%BD/PycharmProjects/pythonProject/coverage_report/z_a44f0ac069e85531_test_widget_py.html]
 
 ## Лицензия:
 
