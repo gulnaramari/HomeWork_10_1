@@ -9,4 +9,5 @@ def test_initial_list() -> list[dict[str, Any]]:
             {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
             {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
             {"id": 616064591, "state": "FAILED", "date": "2022-02-24T08:21:33.419441"},
+            {"id": 2, "state": "EXECUTED", "date": "24/02/2022:08:21:33"},
             ]
