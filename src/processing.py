@@ -28,10 +28,10 @@ print(filter_by_state(info_data))  # По умолчанию "EXECUTED"
 print(filter_by_state(info_data, "CANCELED"))  # Можно передать другое состояние
 print(filter_by_state(info_data, "FAILED"))
 print(filter_by_state(info_data, "PENDING"))
+
+
 def sort_by_date(info_data: list[dict[str, Any]], reverse: bool = True) -> list[dict[str, Any]]:
     """Функция сортировки данных по дате"""
-    sorted_list = sorted(info_data, key=lambda info_data: info_data["date"], reverse=reverse)
-    return sorted_list
-
+    return sorted(info_data, key=lambda x: x["date"], reverse=reverse)
 
 print(sort_by_date(info_data))
