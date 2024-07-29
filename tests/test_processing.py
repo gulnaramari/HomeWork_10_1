@@ -82,4 +82,3 @@ def test_initial_list() -> list[dict[str, Any]]:
 def test_sort_by_date(test_initial_list: list[dict[str, Any]], reverse: bool, expected: list[dict[str, Any]]) -> Any:
     assert sort_by_date(test_initial_list, reverse) == expected
 
-
