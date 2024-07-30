@@ -70,6 +70,7 @@ def test_initial_list() -> list[dict[str, Any]]:
         {"id": 616064591, "state": "FAILED", "date": "2022-02-24T08:21:33.419441"},
     ]
 
+
 @pytest.mark.parametrize("reverse, expected", [
     (True, [
         {"id": 616064591, "state": "FAILED", "date": "2022-02-24T08:21:33.419441"},
