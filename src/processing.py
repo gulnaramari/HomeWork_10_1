@@ -12,10 +12,11 @@ info_data = [
 
 def filter_by_state(info_data: list[dict[str, Any]], state: str = "EXECUTED") -> list[dict[str, Any]]:
     """Функция, описывающая фильтр банковских операций по ключу state"""
+    if not isinstance(state, str):
+        raise TypeError("Ошибка типа данных")
 
     if not state:
         raise ValueError("Введите статус правильно")  # Проверка на статус
-
     new_list = []
     for key in info_data:
         if key.get("state") == state:
@@ -29,9 +30,20 @@ print(filter_by_state(info_data, "CANCELED"))  # Можно передать д�
 print(filter_by_state(info_data, "FAILED"))
 print(filter_by_state(info_data, "PENDING"))
 
+from typing import Any, List, Dict
 
-def sort_by_date(info_data: list[dict[str, Any]], reverse: bool = True) -> list[dict[str, Any]]:
+
+def sort_by_date(info_data: list[dict[str, Any]], reverse: bool = False) -> List[Dict[str, Any]]:
     """Функция сортировки данных по дате"""
-    return sorted(info_data, key=lambda x: x["date"], reverse=reverse)
+    # Проверка на то, что каждый элемент info_data является словарем
+    for item in info_data:
+        if not isinstance(item, dict):
+            raise TypeError("Ошибка типа данных: все элементы должны быть словарями")
 
-print(sort_by_date(info_data))
+    # Сортировка списка словарей по ключу "date"
+    sorted_list = sorted(info_data, key=lambda x: x["date"], reverse=reverse)
+    return sorted_list
+
+
+print(sort_by_date(info_data, reverse=False))
+
