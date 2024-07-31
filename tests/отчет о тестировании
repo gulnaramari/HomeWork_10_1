@@ -1,0 +1,13 @@
+File	function	statements	missing	excluded	coverage
+src\__init__.py	(no function)	0	0	0	        100%
+src\main.py	(no function)	    3	3	0	        0%
+src\masks.py	get_mask_card_number	21	1	0	95%
+src\masks.py	get_mask_account	18	2	0	    89%
+src\masks.py	(no function)	    2	0	0	    100%
+src\processing.py	filter_by_state	9	0	0	    100%
+src\processing.py	sort_by_date	14	1	0	    93%
+src\processing.py	(no function)	10	0	0	    100%
+src\widget.py	mask_account_card	6	1	0	    83%
+src\widget.py	get_date	        8	1	0	    88%
+src\widget.py	(no function)	   7	0	0	    100%
+Total	 	                       98	9	0	    91%
