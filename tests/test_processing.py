@@ -1,5 +1,4 @@
 from typing import Any
-
 import pytest
 
 from src.processing import filter_by_state, sort_by_date
