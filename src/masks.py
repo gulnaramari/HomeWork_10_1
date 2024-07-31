@@ -50,3 +50,4 @@ def get_mask_account(input_data: str) -> str:
     else:
         raise ValueError("Некорректный номер счета")
     return (f"{new_name} {mask_account}")
+

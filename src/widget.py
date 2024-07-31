@@ -17,7 +17,6 @@ def get_date(input_data: str) -> str:
     for arg in input_data:
         if not isinstance(arg, str):
             raise TypeError("Ошибка типа данных")
-
     if len(input_data) == 26 and input_data[10] == "T":
         date = input_data.split("T")[0]
         slice_date = f"{date[-2:]}.{date[5:7]}.{date[:4]}"
