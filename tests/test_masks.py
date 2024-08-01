@@ -1,5 +1,7 @@
 from typing import Any
+
 import pytest
+
 from src.masks import get_mask_account, get_mask_card_number
 
 
@@ -17,10 +19,14 @@ def input_data() -> list[str]:
 
 
 @pytest.mark.parametrize("input_data, expected_mask", [
-                        ("Visa Classic 6831982476737658", "VisaClassic 6831 98** **** 7658"),
-                        ("Visa Gold 5999414228426353", "VisaGold 5999 41** **** 6353"),
-                        ("Maestro 1596837868705199", "Maestro 1596 83** **** 5199"),
-                        ("MasterCard 7158300734726758", "MasterCard 7158 30** **** 6758"),
+                        ("Visa Classic 6831982476737658",
+                         "VisaClassic 6831 98** **** 7658"),
+                        ("Visa Gold 5999414228426353",
+                         "VisaGold 5999 41** **** 6353"),
+                        ("Maestro 1596837868705199",
+                         "Maestro 1596 83** **** 5199"),
+                        ("MasterCard 7158300734726758",
+                         "MasterCard 7158 30** **** 6758"),
                          ])
 def test_get_mask_card_number(input_data: str, expected_mask: str) -> Any:
     assert get_mask_card_number(input_data) == expected_mask

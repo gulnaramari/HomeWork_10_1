@@ -11,6 +11,8 @@ def mask_account_card(input_data: str) -> str:
         return get_mask_account(input_data)
     else:
         return get_mask_card_number(input_data)
+
+
 print(mask_account_card("Счет 73654108430135874305"))
 
 
@@ -19,6 +21,8 @@ def get_data(input_data: str) -> str | None:
     data = input_data.split("T")[0]
     slice_data = f"{data[-2:]}.{data[5:7]}.{data[:4]}"
     return slice_data
+
+
 def get_date(input_data: str) -> str:
     """Функция преобразования даты"""
     for arg in input_data:
