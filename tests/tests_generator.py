@@ -111,4 +111,10 @@ def test_filter_by_currency():
             "to": "Счет 75651667383060284188"
         }
 
+@pytest.mark.parametrize("state","")
+def test_filter_by_currency_null(state, expected):
+    with pytest.raises(SystemExit, match="Отсутствуют данные о транзакциях") as expected:
+        generator = filter_by_currency([])
+        assert next(generator) == expected
+
 

@@ -78,7 +78,6 @@ transactions = (
     ]
 )
 
-
 def filter_by_currency(transactions: list, valuta_code: str = "USD") -> Generator[Any, Any, Any]:
     """Получаю словари, где валюта операции соответствует указанной"""
     if transactions == []:
@@ -86,7 +85,7 @@ def filter_by_currency(transactions: list, valuta_code: str = "USD") -> Generato
     for item in transactions:
         if item.get("operationAmount").get("currency").get("code") != valuta_code:
             sys.exit("Отсутствует такая валюта")
-        elif item.get("operationAmount").get("currency") == {}:
+        elif item.get("state") == "":
             sys.exit("Отсутствуют данные о транзакциях")
         elif item.get("operationAmount").get("currency").get("code") == valuta_code:
             yield item
