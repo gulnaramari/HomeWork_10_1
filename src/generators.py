@@ -108,3 +108,6 @@ def card_number_generator(start: int, stop: int) -> Generator[str, Any, None]:
         card_final = card_number[:4] + " " + card_number[4:8] + " " + card_number[8:12] + " " + card_number[12:]
         yield f"{card_final}"
 
+usd_transactions = filter_by_currency(transactions, "USD")
+for _ in range(2):
+    print(next(usd_transactions))
