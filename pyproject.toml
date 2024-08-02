@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "домашнее задание 10.2"
 authors = ["gulnaramari <gulnaramari@yandex.ru>"]
 license = "MIT"
+
 readme = "README.md"
 
 [tool.poetry.dependencies]
