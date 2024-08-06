@@ -102,7 +102,7 @@ def test_sort_by_date(test_initial_list: list[dict[str, Any]],
      )
     ])
 def test_sort_by_date_without_date(test_initial_list:
-list[dict[str, Any]]) -> Any:
+                                   list[dict[str, Any]]) -> Any:
     with pytest.raises(TypeError):
         sort_by_date(test_initial_list)
 

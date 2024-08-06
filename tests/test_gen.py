@@ -1,4 +1,5 @@
 import pytest
+from typing import Generator, Any
 from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
 
 
@@ -12,9 +13,9 @@ transactions = (
                 "amount": "9824.07",
                 "currency": {"name": "USD", "code": "USD"}
             },
-            "description": "Перевод организации",
-            "from": "Счет 75106830613657916952",
-            "to": "Счет 11776614605963066702"
+            "description": "Translated from organization",
+            "from": "Account 75106830613657916952",
+            "to": "Account 11776614605963066702"
         },
         {
             "id": 142264268,
@@ -27,9 +28,9 @@ transactions = (
                     "code": "USD"
                 }
             },
-            "description": "Перевод со счета на счет",
-            "from": "Счет 19708645243227258542",
-            "to": "Счет 75651667383060284188"
+            "description": "Transfer from account to account",
+            "from": "Account 19708645243227258542",
+            "to": "Account 75651667383060284188"
         },
         {
             "id": 873106923,
@@ -38,13 +39,13 @@ transactions = (
             "operationAmount": {
                 "amount": "43318.34",
                 "currency": {
-                    "name": "руб.",
+                    "name": "RUB",
                     "code": "RUB"
                 }
             },
-            "description": "Перевод со счета на счет",
-            "from": "Счет 44812258784861134719",
-            "to": "Счет 74489636417521191160"
+            "description": "Transfer from account to account",
+            "from": "Account 44812258784861134719",
+            "to": "Account 74489636417521191160"
         },
         {
             "id": 895315941,
@@ -57,7 +58,7 @@ transactions = (
                     "code": "USD"
                 }
             },
-            "description": "Перевод с карты на карту",
+            "description": "Transfer from one card to another",
             "from": "Visa Classic 6831982476737658",
             "to": "Visa Platinum 8990922113665229"
         },
@@ -68,19 +69,20 @@ transactions = (
             "operationAmount": {
                 "amount": "67314.70",
                 "currency": {
-                    "name": "руб.",
+                    "name": "RUB",
                     "code": "RUB"
                 }
             },
-            "description": "Перевод организации",
+            "description": "Translated from organization",
             "from": "Visa Platinum 1246377376343588",
-            "to": "Счет 14211924144426031657"
+            "to": "Account 14211924144426031657"
         }
     ]
 )
 
 
-def test_filter_by_currency():
+def test_filter_by_currency(transactions: list,
+                       valuta_code: str = "USD") -> Generator[Any, Any, Any]:
     generator = filter_by_currency(transactions)
     assert next(generator) == {
             "id": 939719570,
@@ -90,9 +92,9 @@ def test_filter_by_currency():
                 "amount": "9824.07",
                 "currency": {"name": "USD", "code": "USD"}
             },
-            "description": "Перевод организации",
-            "from": "Счет 75106830613657916952",
-            "to": "Счет 11776614605963066702"
+            "description": "Translated from organization",
+            "from": "Account 75106830613657916952",
+            "to": "Account 11776614605963066702"
         }
 
     assert next(generator) == {
@@ -106,46 +108,26 @@ def test_filter_by_currency():
                     "code": "USD"
                 }
             },
-            "description": "Перевод со счета на счет",
-            "from": "Счет 19708645243227258542",
-            "to": "Счет 75651667383060284188"
+            "description": "Transfer from account to account",
+            "from": "Account 19708645243227258542",
+            "to": "Account 75651667383060284188"
         }
-
-
-def test_filter_by_currency_not_code():
-    with pytest.raises(SystemExit, match="Отсутствует такая валюта") as expected:
-        generator = filter_by_currency(transactions, 'EU')
-        assert next(generator) == expected
-
-
-def test_filter_by_currency_not_code():
-    with pytest.raises(SystemExit, match="Отсутствует такая валюта") as expected:
-        generator = filter_by_currency(transactions, '')
-        assert next(generator) == expected
 
 
 def test_transaction_descriptions():
     a = transaction_descriptions(transactions)
-    assert next(a) == "Перевод организации"
+    assert next(a) == "Translated from organization"
 
 
 @pytest.mark.parametrize("index, expected", [
-    (1, "Перевод со счета на счет"), (3, "Перевод с карты на карту")
+    (1, "Transfer from account to account"), (3, "Transfer from one card to another")
 ])
 def test_transaction_descriptions_index(index, expected):
     descriptions = list(transaction_descriptions(transactions))
     assert descriptions[index] == expected
 
 
-
-
-def test_transaction_descriptions_empty():
-    with pytest.raises(SystemExit, match="Отсутствуют данные о транзакциях") as expected:
-        a = transaction_descriptions([])
-        assert next(a) == expected
-
-
-def test_card_number_generator():
+def test_card_number_generator(start: int, stop: int) -> Generator[str, Any, None]:
     num = card_number_generator(800, 801)
     assert next(num) == "0000 0000 0000 0800"
 

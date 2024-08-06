@@ -1,4 +1,3 @@
-import sys
 from typing import Generator, Any
 
 transactions = (
@@ -81,34 +80,36 @@ transactions = (
 
 def filter_by_currency(transactions: list,
                        valuta_code: str = "USD") -> Generator[Any, Any, Any]:
-    """Получаю словари, где валюта операции соответствует указанной"""
+    """Function-generator for valuta"""
     if transactions == []:
-        sys.exit("Отсутствуют данные о транзакциях")
+        raise ValueError("No data")
     for item in transactions:
         if (item.get("operationAmount").get("currency").get("code")
                 != valuta_code):
-            sys.exit("Отсутствует такая валюта")
+            raise ValueError("No data")
         elif item.get("operationAmount").get("currency").get("code") == valuta_code:
             yield item
 
 
 def transaction_descriptions(transactions: list) -> Generator[Any, Any, Any]:
-    """Функция-генератор возвращает возвращает описание каждой операции по очереди"""
+    """Function-generator for descriptions"""
     if not transactions:
-        sys.exit("Отсутствуют данные о транзакциях")
+        raise ValueError("No data")
     for description_oper in transactions:
         yield description_oper.get("description")
 
 
 def card_number_generator(start: int, stop: int) -> Generator[str, Any, None]:
-    """Функция выдает номера банковских карт в заданном диапазоне"""
+    """Function-generator for numbers of cards"""
 
     for x in range(start, stop + 1):
         num_null = "0000000000000000"
         card_number = num_null[: -len(str(x))] + str(x)
-        card_final = card_number[:4] + " " + card_number[4:8] + " " + card_number[8:12] + " " + card_number[12:]
+        card_final = (card_number[:4] + " " + card_number[4:8] +
+                      " " + card_number[8:12] + " " + card_number[12:])
         yield f"{card_final}"
 
+
 usd_transactions = filter_by_currency(transactions, "USD")
-for _ in range(2):
+for x in range(2):
     print(next(usd_transactions))

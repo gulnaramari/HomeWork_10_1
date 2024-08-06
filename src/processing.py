@@ -17,6 +17,7 @@ info_data = [{"id": 41428829, "state": "EXECUTED",
 
 def filter_by_state(info_data: list[dict[str, Any]],
                     state: str = "EXECUTED") -> list[dict[str, Any]]:
+    """Function filtered state"""
     if not isinstance(state, str):
         raise TypeError
     if not state:
@@ -35,8 +36,10 @@ print(filter_by_state(info_data, "PENDING"))
 
 def sort_by_date(info_data: list[dict[str, Any]],
                  reverse: bool = False) -> Any:
+    """Filtration on date"""
     if not all(isinstance(item, dict) for item in info_data):
         raise TypeError
+
     unique_dates = set()
     unique_elements = []
     for item in info_data:
@@ -49,7 +52,8 @@ def sort_by_date(info_data: list[dict[str, Any]],
             unique_dates.add(date)
             unique_elements.append(item)
 
-        sorted_list = sorted(unique_elements, key=lambda x: x["date"],
+    """Filtration on date"""
+    sorted_list = sorted(unique_elements, key=lambda x: x["date"],
                          reverse=reverse)
     return sorted_list
 

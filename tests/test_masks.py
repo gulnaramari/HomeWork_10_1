@@ -7,16 +7,15 @@ from src.masks import get_mask_account, get_mask_card_number
 
 @pytest.fixture
 def input_data() -> list[str]:
-    return [
-        "Maestro 1596837868705199",
-        "Ñ÷åò 64686473678894779589",
-        "MasterCard 7158300734726758",
-        "Ñ÷åò 35383033474447895560",
-        "Visa Classic 6831982476737658",
-        "Visa Platinum 8990922113665229",
-        "Visa Gold 5999414228426353",
-        "Ñ÷åò 73654108430135874305",
-        ]
+    return ["Maestro 1596837868705199",
+            "Account 64686473678894779589",
+            "MasterCard 7158300734726758",
+            "Account 35383033474447895560",
+            "Visa Classic 6831982476737658",
+            "Visa Platinum 8990922113665229",
+            "Visa Gold 5999414228426353",
+            "Account 73654108430135874305",
+            ]
 
 
 @pytest.mark.parametrize("input_data, expected_mask", [
@@ -70,7 +69,7 @@ def test_get_upper_format_name_card_number(input_data: str) -> Any:
 
 def test_get_uncorrect_name_card_number(input_data: str) -> Any:
     with pytest.raises(ValueError):
-        get_mask_card_number("Ñ÷åò 73654108430135874305")
+        get_mask_card_number("Account 73654108430135874305")
 
 
 @pytest.mark.parametrize("input_data", [
@@ -86,18 +85,18 @@ def test_get_mask_card_number_wrong_type(input_data: str) -> Any:
 
 @pytest.fixture
 def user_data() -> list[str]:
-    return ["Ñ÷åò 64686473678894779589",
-            "Ñ÷åò 35383033474447895560",
+    return ["Account 64686473678894779589",
+            "Account 35383033474447895560",
             "Visa Platinum 8990922113665229",
             "Visa Gold 5999414228426353",
-            "Ñ÷åò 73654108430135874305",
+            "Account 73654108430135874305",
             ]
 
 
 @pytest.mark.parametrize("user_data, expected_mask", [
-                        ("Ñ÷åò 64686473678894779589", "Ñ÷åò **9589"),
-                        ("Ñ÷åò 35383033474447895560", "Ñ÷åò **5560"),
-                        ("Ñ÷åò 73654108430135874305", "Ñ÷åò **4305"),
+                        ("Account 64686473678894779589", "Account **9589"),
+                        ("Account 35383033474447895560", "Account **5560"),
+                        ("Account 73654108430135874305", "Account **4305"),
                         ])
 def test_get_mask_account(user_data: str, expected_mask: str) -> Any:
     assert get_mask_account(user_data) == expected_mask
