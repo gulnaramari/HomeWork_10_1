@@ -1,16 +1,16 @@
 src\__init__.py                0      0   100%
-src\generators.py             24      3    88%
+src\generators.py             20      1    95%
 src\masks.py                  40      2    95%
 src\processing.py             33      1    97%
 src\widget.py                 22      2    91%
 tests\__init__.py              0      0   100%
-tests\conftest.py              5      1    80%
-tests\test_gen.py             24      0   100%
+tests\conftest.py             19      2    89%
+tests\test_gen.py             32      1    97%
 tests\test_masks.py           50      0   100%
 tests\test_processing.py      28      0   100%
 tests\test_widget.py          29      1    97%
 ----------------------------------------------
-TOTAL                        255     10    96%
+TOTAL                        273     10    96%
 
 
 

@@ -1,4 +1,4 @@
-from typing import Generator, Any
+from typing import Any, Generator
 
 transactions = (
     [
@@ -8,7 +8,10 @@ transactions = (
             "date": "2018-06-30T02:08:58.425572",
             "operationAmount": {
                 "amount": "9824.07",
-                "currency": {"name": "USD", "code": "USD"}
+                "currency": {
+                    "name": "USD",
+                    "code": "USD"
+                }
             },
             "description": "Перевод организации",
             "from": "Счет 75106830613657916952",
@@ -78,23 +81,23 @@ transactions = (
 )
 
 
-def filter_by_currency(transactions: list,
-                       valuta_code: str = "USD") -> Generator[Any, Any, Any]:
-    """Function-generator for valuta"""
-    if transactions == []:
-        raise ValueError("No data")
-    for item in transactions:
-        if (item.get("operationAmount").get("currency").get("code")
-                != valuta_code):
-            raise ValueError("No data")
-        elif item.get("operationAmount").get("currency").get("code") == valuta_code:
-            yield item
+def filter_by_currency(transactions: list[dict[str, Any]],
+                       currency: dict) -> Generator[Any, Any, Any]:
+    """Function-generator for filtration on valuta"""
+    if len(transactions) > 0:
+        filtered_transactions = filter(
+            lambda transactions:
+            transactions.get("operationAmount").get("currency").get("code")
+            == currency, transactions)
+        return filtered_transactions
+    else:
+        return "Empty list!"
 
 
 def transaction_descriptions(transactions: list) -> Generator[Any, Any, Any]:
     """Function-generator for descriptions"""
     if not transactions:
-        raise ValueError("No data")
+        raise ValueError("Empty list!")
     for description_oper in transactions:
         yield description_oper.get("description")
 
@@ -110,6 +113,5 @@ def card_number_generator(start: int, stop: int) -> Generator[str, Any, None]:
         yield f"{card_final}"
 
 
-usd_transactions = filter_by_currency(transactions, "USD")
-for x in range(2):
-    print(next(usd_transactions))
+for card in card_number_generator(1, 5):
+    print(card)
