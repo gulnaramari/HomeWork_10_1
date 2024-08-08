@@ -8,14 +8,11 @@ transactions = (
             "date": "2018-06-30T02:08:58.425572",
             "operationAmount": {
                 "amount": "9824.07",
-                "currency": {
-                    "name": "USD",
-                    "code": "USD"
-                }
+                "currency": {"name": "USD", "code": "USD"}
             },
-            "description": "Перевод организации",
-            "from": "Счет 75106830613657916952",
-            "to": "Счет 11776614605963066702"
+            "description": "Translated from organization",
+            "from": "Account 75106830613657916952",
+            "to": "Account 11776614605963066702"
         },
         {
             "id": 142264268,
@@ -28,9 +25,9 @@ transactions = (
                     "code": "USD"
                 }
             },
-            "description": "Перевод со счета на счет",
-            "from": "Счет 19708645243227258542",
-            "to": "Счет 75651667383060284188"
+            "description": "Transfer from account to account",
+            "from": "Account 19708645243227258542",
+            "to": "Account 75651667383060284188"
         },
         {
             "id": 873106923,
@@ -39,13 +36,13 @@ transactions = (
             "operationAmount": {
                 "amount": "43318.34",
                 "currency": {
-                    "name": "руб.",
+                    "name": "RUB",
                     "code": "RUB"
                 }
             },
-            "description": "Перевод со счета на счет",
-            "from": "Счет 44812258784861134719",
-            "to": "Счет 74489636417521191160"
+            "description": "Transfer from account to account",
+            "from": "Account 44812258784861134719",
+            "to": "Account 74489636417521191160"
         },
         {
             "id": 895315941,
@@ -58,7 +55,7 @@ transactions = (
                     "code": "USD"
                 }
             },
-            "description": "Перевод с карты на карту",
+            "description": "Transfer from one card to another",
             "from": "Visa Classic 6831982476737658",
             "to": "Visa Platinum 8990922113665229"
         },
@@ -69,13 +66,13 @@ transactions = (
             "operationAmount": {
                 "amount": "67314.70",
                 "currency": {
-                    "name": "руб.",
+                    "name": "RUB",
                     "code": "RUB"
                 }
             },
-            "description": "Перевод организации",
+            "description": "Translated from organization",
             "from": "Visa Platinum 1246377376343588",
-            "to": "Счет 14211924144426031657"
+            "to": "Account 14211924144426031657"
         }
     ]
 )
@@ -84,14 +81,14 @@ transactions = (
 def filter_by_currency(transactions: list[dict[str, Any]],
                        currency: dict) -> Generator[Any, Any, Any]:
     """Function-generator for filtration on valuta"""
-    if len(transactions) > 0:
-        filtered_transactions = filter(
-            lambda transactions:
-            transactions.get("operationAmount").get("currency").get("code")
-            == currency, transactions)
-        return filtered_transactions
-    else:
-        return "Empty list!"
+    if not transactions:
+        raise ValueError("Empty list!")
+
+    for item, currency_list in enumerate(transactions):
+        if currency_list["operationAmount"]["currency"]["name"] == currency:
+            yield currency_list
+            if item == 3:
+                break
 
 
 def transaction_descriptions(transactions: list) -> Generator[Any, Any, Any]:
@@ -115,3 +112,13 @@ def card_number_generator(start: int, stop: int) -> Generator[str, Any, None]:
 
 for card in card_number_generator(1, 5):
     print(card)
+
+descriptions = transaction_descriptions(transactions)
+for _ in range(5):
+    print(next(descriptions))
+
+
+i = filter_by_currency(transactions, "USD")
+print(next(i))
+print(next(i))
+print(next(i))

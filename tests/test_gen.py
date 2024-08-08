@@ -78,9 +78,9 @@ def transactions() -> list[dict[str, Any]]:
 
 def test_filter_by_currency(
     transactions: list[dict[str, Any]],
-    valuta_code: str = "USD"
+    currency: str = "USD"
 ) -> Generator[Any, Any, Any]:
-    filtered_transactions = filter_by_currency(transactions, valuta_code)
+    filtered_transactions = filter_by_currency(transactions, currency)
     assert next(filtered_transactions) == {
         "id": 939719570, "state": "EXECUTED",
         "date": "2018-06-30T02:08:58.425572",
@@ -94,11 +94,9 @@ def test_filter_by_currency(
     }
 
 
-def test_filter_by_currency_exc(transactions):
-    result = filter_by_currency(transactions, "EUR")
-    assert list(result) == []
-    result = filter_by_currency([], "EUR")
-    assert result == "Empty list!"
+def test_filter_by_currency_empty(transactions):
+    with pytest.raises(AssertionError):
+        assert filter_by_currency([], "EUR") == "Empty list!"
 
 
 @pytest.mark.parametrize("index, expected", [

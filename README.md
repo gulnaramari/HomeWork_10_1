@@ -32,19 +32,25 @@ pip install -r requirements.txt
 Информация о тестировании приложения:
 см. в файле [отчет о тестировании от 31.07.2024_17.59].
 Общий процент покрытия приложения тестами составляет 96%.
+---------- coverage: platform win32, python 3.12.4-final-0 -----------
+Name                       Stmts   Miss  Cover
+----------------------------------------------
 src\__init__.py                0      0   100%
-src\generators.py             20      1    95%
+src\generators.py             30      3    90%
 src\masks.py                  40      2    95%
 src\processing.py             33      1    97%
 src\widget.py                 22      2    91%
 tests\__init__.py              0      0   100%
 tests\conftest.py             19      2    89%
-tests\test_gen.py             32      1    97%
+tests\test_gen.py             27      0   100%
 tests\test_masks.py           50      0   100%
 tests\test_processing.py      28      0   100%
 tests\test_widget.py          29      1    97%
 ----------------------------------------------
-TOTAL                        273     10    96%
+TOTAL                        278     11    96%
+
+
+
 
 
 ## Лицензия:
